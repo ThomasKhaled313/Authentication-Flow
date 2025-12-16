@@ -64,22 +64,10 @@ const loginController = async (req, res, next) => {
     { expiresIn: process.env.JWT_EXPIRES_IN }
   );
 
-  const refreshToken = jwt.sign(
-    { id: existingUser._id, email: existingUser.email, role: existingUser.role },
-    process.env.REFRESH_SECRET,
-    { expiresIn: process.env.REFRESH_EXPIRES_IN }
-  );  
-
-   existingUser.refreshToken = crypto
-    .createHash("sha256")
-    .update(refreshToken)
-    .digest("hex");
-
   res.status(200).json({
     status: HttpStatusText.SUCCESS,
     message: "Loggedin successfully",
     token,
-    refreshToken,
     data: {
       role: existingUser.role,
       username: existingUser.username,
