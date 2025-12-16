@@ -9,7 +9,6 @@ const {
   validateLogin,
   validateForgotPassword,
   validateResetPassword,
-  validateRefreshToken
 } = require("../validators/auth.validators");
 
 router.route("/register").post(validateRegister, authController.registerController);
